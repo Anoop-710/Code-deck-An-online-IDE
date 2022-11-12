@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import LeftComponent from './LeftComponent';
+import RightComponent from './RightComponent';
 
 
 const StyledHome = styled.div`
@@ -12,6 +13,7 @@ function index() {
   return (
     <div>
       <LeftComponent/>
+      <RightComponent />
     </div>
   )
 }
