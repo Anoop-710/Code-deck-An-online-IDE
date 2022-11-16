@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import logo from '../../Assets/logo.png';
+import { ModalContext } from '../../Context/ModalContext';
 
 const StyledLeftComponent = styled.div`
     position: fixed;
@@ -58,16 +59,17 @@ const AddPlayground = styled.button`
     }
 `
 const LeftComponent = () => {
+    const {setModal} = React.useContext(ModalContext)
     return (
         <StyledLeftComponent>
             <ContentContainer>
                 <Logo src={logo} alt="" />
                 <MainHeading> <span>Code</span> Deck</MainHeading>
                 <SubHeading>Code. Compile. Develop.</SubHeading>
-                <AddPlayground><span>+</span> Create New Playground</AddPlayground>
+                <AddPlayground onClick={()=>setModal(true ,3)}><span>+</span> Create New Playground</AddPlayground>
             </ContentContainer>
         </StyledLeftComponent>
-    )
+    ) 
 }
 
 export default LeftComponent

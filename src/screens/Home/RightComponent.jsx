@@ -4,6 +4,7 @@ import { HiOutlineTrash } from 'react-icons/hi';
 import { BiEditAlt } from 'react-icons/bi'
 import logo from '../../Assets/logo-small.png';
 
+import { ModalContext } from '../../Context/ModalContext';
 
 const StyledRightComponent = styled.div`
     
@@ -190,7 +191,8 @@ const Logo = styled.img`
     margin-right: 1rem;
 `
 
-function RightComponent() {
+const RightComponent = () => {
+    const {setModal} = React.useContext(ModalContext);
     const [darkMode,setDarkMode] = React.useState(false);
 
   return (
@@ -214,7 +216,7 @@ function RightComponent() {
                 <Heading size="large">
                 My Playground
                 </Heading>
-                <AddFolder><span>+</span> New Folder</AddFolder>
+                <AddFolder onClick={()=>{setModal(true,1)}}><span>+</span> New Folder</AddFolder>
             </Header>
             <hr />
 
@@ -227,8 +229,8 @@ function RightComponent() {
                     </Heading>
                     <FolderIcons>
                         <HiOutlineTrash />
-                        <BiEditAlt />
-                        <AddFolder><span>+</span> New Playground</AddFolder>
+                        <BiEditAlt onClick={()=>{setModal(true, 4)}}/>
+                        <AddFolder onClick={()=>{setModal(true, 2)}}><span>+</span> New Playground</AddFolder>
                     </FolderIcons>
                 </Header>
 
@@ -250,7 +252,7 @@ function RightComponent() {
 
                     <FolderIcons>
                     <HiOutlineTrash />
-                    <BiEditAlt />
+                    <BiEditAlt onClick={()=>{setModal(true,5)}}/>
                         
                     </FolderIcons>
                     </Card>

@@ -1,23 +1,27 @@
-import React from 'react';
+import React, { useState,useContext } from 'react';
 import styled from 'styled-components';
 import LeftComponent from './LeftComponent';
 import RightComponent from './RightComponent';
 import Modal from '../../Components/Modal';
+
+import { ModalContext } from '../../Context/ModalContext';
 
 const StyledHome = styled.div`
   width: 100%;
   heigh: 100vh;
   font-family: 'Poppins', sans-serif;
 `
-function index() {
-  const isOpenModal = false;
+const Home = () => {
+  // const [isOpenModal,setIsOpenModal] = useState(true);
+  const {isOpenModal} = useContext(ModalContext);
+
   return (
-    <div>
-      <LeftComponent/>
+    <StyledHome>
+      <LeftComponent />
       <RightComponent />
-      { isOpenModal && <Modal />} 
-    </div>
+      { isOpenModal && <Modal/>} 
+    </StyledHome>
   )
 }
 
-export default index
+export default Home

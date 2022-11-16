@@ -6,8 +6,11 @@ import Home from './screens/Home';
 import Playground from './screens/Playground/Playground';
 import Error404 from './screens/Error404/Error404';
 
+import ModalProvider from './Context/ModalContext';
+
 function App() {
   return (
+    <ModalProvider >
     <BrowserRouter>
     <GlobalStyle />
       <Routes>
@@ -16,6 +19,7 @@ function App() {
         <Route path='*' element={<Error404 />} />
       </Routes>
     </BrowserRouter>
+    </ModalProvider>
   );
 }
 
