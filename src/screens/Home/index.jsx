@@ -19,7 +19,7 @@ const Home = () => {
     <StyledHome>
       <LeftComponent />
       <RightComponent />
-      { isOpenModal && <Modal/>} 
+      { isOpenModal.show && <Modal/>} 
     </StyledHome>
   )
 }

@@ -35,7 +35,8 @@ export const Heading = styled.h3`
   }`
 
 const Modal = ({setIsOpenModal}) => {
-  const {modalType} = React.useContext(ModalContext);
+  const {isOpenModal} = React.useContext(ModalContext);
+  const {modalType} = isOpenModal.modalType;
   return (
     <ModalContainer>
         <ModalContent>
