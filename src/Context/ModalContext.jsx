@@ -5,7 +5,7 @@ import { createContext,useState } from "react";
 export const ModalContext = createContext();
 
 // ModalFields: {folderName,fileName,language,type,isOpenModal}
-export default function ModalProvider({children}){
+function ModalProvider({children}){
 
     const initialModalFields = {
         show: false,
@@ -37,3 +37,5 @@ export default function ModalProvider({children}){
         </ModalContext.Provider>
     )
 }
+
+export default ModalProvider;

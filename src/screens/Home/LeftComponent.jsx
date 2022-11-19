@@ -69,7 +69,7 @@ const LeftComponent = () => {
                 <AddPlayground onClick={()=>openModal({
                     show: true,
                     modalType: 3,
-                    identifier: {
+                    identifiers: {
                         folderId: "",
                         cardId: "",
                     },
