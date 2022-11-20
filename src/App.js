@@ -16,9 +16,9 @@ function App() {
       <BrowserRouter>
       <GlobalStyle />
         <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/playground' element={<Playground/>} />
-          <Route path='*' element={<Error404 />} />
+        <Route path="/" element={<Home />} />
+            <Route path="/playground/:folderId/:playgroundId" element={<Playground />} />
+            <Route path="*" element={<Error404 />} />
         </Routes>
       </BrowserRouter>
       </ModalProvider>

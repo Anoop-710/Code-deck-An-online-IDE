@@ -8,6 +8,7 @@ import logo from '../../Assets/logo-small.png';
 import { ModalContext } from '../../Context/ModalContext';
 import { PlaygroundContext } from '../../Context/PlaygroundContext';
 
+import { useNavigate } from 'react-router-dom'
 
 const StyledRightComponent = styled.div`
     
@@ -198,6 +199,8 @@ const RightComponent = () => {
     const {openModal} = React.useContext(ModalContext);
     const [darkMode,setDarkMode] = React.useState(false);
     const {folders, deleteFolder, deleteCard} = useContext(PlaygroundContext);
+
+    const navigate = useNavigate();
   return (
     <>
         
@@ -262,7 +265,9 @@ const RightComponent = () => {
             <PlayGroundCards>
               {
                 Object.entries(folder['playgrounds']).map((playgroundId,playground) => (
-                  <Card key={playgroundId}>
+                  <Card key={playgroundId} onClick={() => {
+                    navigate(`/playground/${folderId}/${playgroundId}`)
+                  }}>
                     <CardContainer>
                       <Logo src={logo} />
                       <CardContent>
@@ -270,7 +275,9 @@ const RightComponent = () => {
                         <p>Language: {playground.language}</p>
                       </CardContent>
                     </CardContainer>
-                    <FolderIcons>
+                    <FolderIcons onClick={(e) => {
+                      e.stopPropagation(); //stop click propagation from child to parent
+                    }}>
                       <IoTrashOutline onClick={() => deleteCard(folderId, playgroundId)} />
                       <BiEditAlt onClick={() => openModal({
                         show: true,

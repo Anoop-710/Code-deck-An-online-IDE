@@ -2,6 +2,7 @@ import React , {useState} from 'react'
 import { Header, Heading } from '../Modal'
 import { IoCloseSharp } from 'react-icons/io5'
 import {ModalContext} from '../../Context/ModalContext';
+import { PlaygroundContext } from '../../Context/PlaygroundContext';
 
 import Select from 'react-select';
 import styled from 'styled-components';
@@ -29,7 +30,8 @@ const InputWithSelect = styled.div`
 
 const NewPlaygroundAndFolder = () => {
   const {closeModal} = React.useContext(ModalContext);
-
+  const {addPlaygroundAndFolder} = React.useContext(PlaygroundContext);
+   
   const languageOptions = [
     { value: "c++", label: "C++" },
     { value: "java", label: "Java" },
@@ -54,10 +56,10 @@ const NewPlaygroundAndFolder = () => {
       </Header>
       <InputWithSelect>
         <label>Enter Folder Name</label>
-        <input type='text' />
+        <input type='text' onChange={(e)=> setFolderName(e.target.value) }/>
 
         <label>Enter Card Name</label>
-        <input type='text'  />
+        <input type='text' onChange={(e)=> setPlaygroundName(e.target.value) } />
 
         <Select
           options={languageOptions}
@@ -65,7 +67,11 @@ const NewPlaygroundAndFolder = () => {
           onChange={handleLanguageChange}
         />
 
-        <button> Create Playground </button>
+        <button onClick={()=>{
+          addPlaygroundAndFolder(folderName, playgroundName, language.label)
+          closeModal();
+
+        }}> Create Playground </button>
       </InputWithSelect>
     </>
   )

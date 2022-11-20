@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-
+import { v4 as uuid} from 'uuid';
 export const PlaygroundContext = createContext();
 
 const PlaygroundProvider = ({ children }) => {
@@ -42,59 +42,87 @@ const PlaygroundProvider = ({ children }) => {
 })
 
     const deleteCard = (folderId, cardId) => {
-        const newFolders = folders.map((folder) => {
-            if(folder.id === folderId){
-                folder['playgrounds'] = folder['playgrounds'].filter((playgrounds) => playgrounds.id !== cardId)
-            }
-            return folder;
-        })
-        setFolders(newFolders);
+        setFolders((oldState) => {
+            const newState = { ...oldState };
+            delete newState[folderId].playgrounds[cardId];
+            return newState;
+        });
     }
 
     const deleteFolder = (folderId) => {
-        setFolders(folders.filter((folder) => folder.id !== folderId));
+        setFolders((oldState) => {
+            const newState = { ...oldState };
+            delete newState[folderId];
+            return newState;
+        });
     }
 
     //Creating/add new folder
-    const addFolder = () => {
-        console.log('addFolder');
+    const addFolder = (folderName) => {
+        setFolders((oldState) => {
+            const newState = { ...oldState };
+
+            newState[uuid()] = {
+                title: folderName,
+                playgrounds: {}
+            }
+
+            return newState;
+        })
     }
 
 
     //Adding new card
-    const addCard = (folderId) =>{
-        console.log('add card in folder', folderId);
+    const addPlayground = (folderId, playgroundName, language) => {
+        setFolders((oldState) => {
+            const newState = { ...oldState };
+
+            newState[folderId].playgrounds[uuid()] = {
+                title: playgroundName,
+                language: language
+            }
+
+            return newState;
+        })
     }
 
     //Add card and folder
-    const addCardAndFolder = () => {
-        console.log('addCardAndFolder');
+    const addPlaygroundAndFolder = (folderName, playgroundName, language) => {
+        setFolders((oldState) => {
+            const newState = { ...oldState }
 
+            newState[uuid()] = {
+                title: folderName,
+                playgrounds: {
+                    [uuid()]: {
+                        title: playgroundName,
+                        language: language
+                    }
+                }
+            }
+
+            return newState;
+        })
     }
 
     //Edit folder title
-    const editFolderTitle = (folderId,folderName) =>{
-        setFolders({
-            ...folders,
-            [folderId]: {
-                ...folders[folderId],
-                title: folderName,
-            }
+    const editFolderTitle = (folderId, folderName) => {
+        setFolders((oldState) => {
+            const newState = { ...oldState }
+            newState[folderId].title = folderName;
+            return newState;
         })
     }
 
+
+
     //Edit card title
-    const editCardTitle = (folderId,cardId,PlaygroundTitle) =>{
-        setFolders({
-            ...folders,
-            [folderId]: {
-                ...folders[folderId],
-                [cardId]: {
-                    ...folders[folderId][cardId],
-                    title: PlaygroundTitle,
-                }
-            }
-        })
+    const editPlaygroundTitle = (folderId,cardId,PlaygroundTitle) =>{
+       setFolders((oldState) => {
+        const newState = {...oldState };
+        newState[folderId].playgrounds[cardId].title = PlaygroundTitle;
+        return newState;
+       })
 
     }
 
@@ -103,10 +131,10 @@ const PlaygroundProvider = ({ children }) => {
         deleteCard: deleteCard,
         deleteFolder: deleteFolder,
         addFolder: addFolder,
-        addCard: addCard,
-        addCardAndFolder: addCardAndFolder,
+        addPlayground: addPlayground,
+        addPlaygroundAndFolder: addPlaygroundAndFolder,
         editFolderTitle: editFolderTitle,
-        editCardTitle: editCardTitle
+        editFolderTitle: editFolderTitle,
     }
     return (
         <PlaygroundContext.Provider value={PlayGroundFeatures}>
