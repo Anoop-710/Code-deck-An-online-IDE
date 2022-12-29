@@ -2,6 +2,11 @@
 
 Code Deck is a web-based integrated development environment (IDE) that allows you to write, compile, and run code in a variety of programming languages. It includes features such as syntax highlighting, themes, and a built-in debugger.
 
+Deployed link: https://csb-nqqkok.netlify.app/
+
+![Screenshot (513)](https://user-images.githubusercontent.com/111621777/209946920-2548b8ca-133f-4861-9fbc-83be18fcfe94.png)
+![Screenshot (514)](https://user-images.githubusercontent.com/111621777/209946924-8d9fd831-7898-40a5-af3c-0e50e5566021.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -34,6 +39,8 @@ yarn start
 ## Built With
 
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+
+
 - [Styled Components](https://styled-components.com/) - A CSS-in-JS library for styling React components
 
 ## Contributing
